@@ -1,4 +1,4 @@
-package io.datajek.spring.basics.movierecommendersystem.lesson7;
+package io.datajek.spring.basics.movierecommendersystem.lesson8;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
