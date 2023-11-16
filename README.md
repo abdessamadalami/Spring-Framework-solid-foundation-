@@ -37,3 +37,27 @@ The default scope of a bean is singleton, in which only one instance of the bean
 ![alt-text](https://refactoring.guru/images/patterns/content/singleton/singleton.png?id=108a0b9b5ea5c4426e0afa4504491d6f "Singleton")
 ![alt-text](./imgs/prototype.png "**_Prototype_**")
 
+### Lesson 9: Mixing Bean Scope
+
+The prototype bean is injected into the singleton bean at the time of creation of the singleton bean when the container initializes it. This explains the following messages in the output:
+
+ContentBasedFilter constructor called
+
+Movie constructor called
+
+The same instance of the bean is returned by the application context every time it is requested using the getMovie method.
+ we can solve this problem with the PROXY for add indirection to get autowire and this happened when we add this "proxyMode=ScopedProxyMode.TARGET_CLASS" to scope annotation in the movie class.
+
+Movie bean with prototype scope
+Movie constructor called
+io.datajek.spring.basics.movierecommendersystem.lesson9.Movie@4390f46e
+
+this the output when we add proxy to scope annotation 
+Movie constructor called
+
+io.datajek.spring.basics.movierecommendersystem.lesson9.Movie@7c6442c2
+
+Movie constructor called
+
+io.datajek.spring.basics.movierecommendersystem.lesson9.Movie@2d746ce4
+
