@@ -92,7 +92,39 @@ The @SpringBootApplication annotation is a combination of three annotations:
 
 when we use this annotation spring searches the package where it is present, as well as all the sub-packages. If a bean
 is present in a package other than the base package or its sub-packages, it will not be found.
+
 * @**_ComponentScan_** for specific package:
-@ComponentScan is used to specify the packages that should be scanned for Spring components, such as @Controller,
-@Service, and @Repository. By default, it scans the current package and its sub-packages. However, you can specify
-specific packages to be scanned using the basePackages attribute.
+  @ComponentScan is used to specify the packages that should be scanned for Spring components, such as @Controller,
+  @Service, and @Repository. By default, it scans the current package and its sub-packages. However, you can specify
+  specific packages to be scanned using the basePackages attribute.
+
+### Lesson 11: Bean Lifecycle: @PostConstruct, @PreDestroy
+
+###     * **_@PostConstruct:_**
+
+A method with this annotation works like the init method. The @PostConstruct annotation tells Spring to call the
+method for us once the object has been created. The method can have any name and its return type is always void. After
+the bean is created, we can initialize the contents of the bean, load data, establish a database connection, or
+connect to a web server. The post construct method is only called after all the dependencies have been populated.
+
+this how this is going:
+![alt-text](./imgs/Postconstruct.png)
+By utilizing a logger object, we can capture important information during the execution of our Java application,
+making it easier to debug and understand its behavior and for see the bean creation:
+![alt-text](./imgs/logger.png)
+
+###     * **_@PreDestroy:_**
+
+The method having this annotation is called when the bean is in the process of being removed from the container. All
+cleanup stuff can be performed in this method. A method with the @PreDestroy annotation can be used to release resources
+or close a database connection.
+![alt-text](./imgs/PreDestroy.png)
+
+# **Lifecycle of prototype beans**
+
+Spring manages the entire lifecycle of singleton beans but it does not completely manage the lifecycle of prototype
+beans. This is because there might be a large number of prototype instances and the container can become overwhelmed
+keeping track of them.
+![alt-text](./imgs/lifecycleOfPrototype.png)
+When the application terminates, the PreDestroy method is called for the singleton RecommenderImplementation bean (and
+its dependency ContentBasedFilter bean) but not for the prototype scoped Movie bean.
